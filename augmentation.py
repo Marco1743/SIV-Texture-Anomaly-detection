@@ -1,7 +1,6 @@
 import numpy as np
 
 def add_salt_and_pepper_noise(image, amount=0.04):
-    """Aggiunge rumore impulsivo (Salt & Pepper)."""
     noisy_img = np.copy(image)
     num_salt = np.ceil(amount * image.size * 0.5)
     coords = [np.random.randint(0, i - 1, int(num_salt)) for i in image.shape[:2]]
@@ -12,20 +11,12 @@ def add_salt_and_pepper_noise(image, amount=0.04):
     return noisy_img
 
 def custom_gaussian_kernel(size, sigma=1.0):
-    """
-    A. GENERAZIONE KERNEL GAUSSIANO (LSI System)
-    Implementa la formula: h(m,n) = (1/2pi*sigma^2) * exp(-(m^2+n^2)/(2*sigma^2))
-    """
     ax = np.linspace(-(size // 2), size // 2, size)
     xx, yy = np.meshgrid(ax, ax)
     kernel = np.exp(-(xx**2 + yy**2) / (2. * sigma**2))
     return kernel / np.sum(kernel) 
 
 def apply_convolution(image, kernel):
-    """
-    A. CONVOLUZIONE DISCRETA 2D
-    Implementa l'operazione di filtraggio spaziale FIR.
-    """
     i_h, i_w = image.shape
     k_h, k_w = kernel.shape
     pad = k_h // 2

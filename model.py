@@ -15,12 +15,6 @@ def create_encoder(dim_projection=128):
 
 class MoCo(nn.Module):
     def __init__(self, dim=128, K=4096, m=0.999, T=0.07):
-        """
-        dim: dimensione delle feature proiettate (es. 128)
-        K: grandezza della coda (quante immagini passate ricorda)
-        m: coefficiente di momentum per l'aggiornamento dell'encoder fantasma
-        T: temperatura per la loss InfoNCE
-        """
         super(MoCo, self).__init__()
         
         self.K = K
@@ -39,18 +33,11 @@ class MoCo(nn.Module):
 
     @torch.no_grad()
     def _momentum_update_key_encoder(self):
-        """
-        Aggiorna l'encoder Key lentamente (Media Mobile Esponenziale)
-        usando i pesi dell'encoder Query.
-        """
         for param_q, param_k in zip(self.encoder_q.parameters(), self.encoder_k.parameters()):
             param_k.data = param_k.data * self.m + param_q.data * (1. - self.m)
 
     @torch.no_grad()
     def _dequeue_and_enqueue(self, keys):
-        """
-        Aggiunge le nuove immagini alla coda e butta fuori le più vecchie.
-        """
         batch_size = keys.shape[0]
         ptr = int(self.queue_ptr)
 
