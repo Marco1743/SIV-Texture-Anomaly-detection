@@ -1,4 +1,4 @@
- **Disclaimer:** This README and portions of the documentation were generated with the assistance of a Large Language Model (LLM), based on the author's original project report and code.
+ **Disclaimer:** This README was generated with the assistance of a Large Language Model (LLM), based on the author's original project report and code.
 
 # Texture Anomaly Detection: Self-Supervised MoCo vs. Low-Level Processing 
 
