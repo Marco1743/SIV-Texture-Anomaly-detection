@@ -6,7 +6,6 @@ import torch
 from torch.utils.data import Dataset
 import torchvision.transforms as transforms
 
-# Importiamo le TUE funzioni
 from augmentation import custom_histogram_equalization, apply_convolution, custom_gaussian_kernel
 
 class MoCoTextureDataset(Dataset):
@@ -15,7 +14,6 @@ class MoCoTextureDataset(Dataset):
         self.image_paths = [os.path.join(data_dir, f) for f in os.listdir(data_dir) if f.endswith('.png')]
         self.is_train = is_train
 
-        # IL FIX: Aggiungiamo un Resize a 224x224 (Standard per ResNet)
         self.resize = transforms.Resize((224, 224))
         self.to_tensor = transforms.ToTensor()
 
@@ -36,7 +34,6 @@ class MoCoTextureDataset(Dataset):
         img_path = self.image_paths[idx]
         img_pil = Image.open(img_path).convert('L')
         
-        # Applichiamo il resize spaziale PRIMA di convertirla in array!
         img_pil = self.resize(img_pil)
         img_arr = np.array(img_pil)
 
