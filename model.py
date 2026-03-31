@@ -3,6 +3,8 @@ import torch.nn as nn
 import torchvision.models as models
 
 def create_encoder(dim_projection=128):
+
+    resnet = models.resnet18(weights=None)
     resnet.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)
     dim_mlp = resnet.fc.in_features
     resnet.fc = nn.Sequential(
