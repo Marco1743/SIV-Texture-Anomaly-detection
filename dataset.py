@@ -41,8 +41,8 @@ class MoCoTextureDataset(Dataset):
             view_1_arr = self.apply_custom_augs(img_arr)
             view_2_arr = self.apply_custom_augs(img_arr)
             
-            view_1 = self.to_tensor(Image.fromarray(view_1_arr))
-            view_2 = self.to_tensor(Image.fromarray(view_2_arr))
+            view_1 = self.to_tensor(Image.fromarray(view_1_arr).convert('RGB'))
+            view_2 = self.to_tensor(Image.fromarray(view_2_arr).convert('RGB'))
             
             return view_1, view_2
         else:
