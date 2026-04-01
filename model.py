@@ -4,7 +4,7 @@ import torchvision.models as models
 
 def create_encoder(dim_projection=128):
 
-    resnet = models.resnet18(weights='DEFAULT')
+    resnet = models.resnet18(weights=None)
     dim_mlp = resnet.fc.in_features
     resnet.fc = nn.Sequential(
         nn.Linear(dim_mlp, dim_mlp),
